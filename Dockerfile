@@ -1,12 +1,12 @@
 FROM openjdk:8-jre-alpine
 
-ARG HADOOP_VERSION=2.7.6
+ARG HADOOP_VERSION
 ENV HADOOP_ROOT_LOGGER="WARN,console"
 ENV YARN_ROOT_LOGGER="WARN,console"
 ENV PATH="/opt/bin:${PATH}"
 
 RUN mkdir -p /opt/logs && \
-    wget -q http://www-eu.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz -O - | tar -xz -C /opt --strip-components=1 && \
+    wget -q http://archive.apache.org/dist/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz -O - | tar -xz -C /opt --strip-components=1 && \
     apk add --quiet --no-cache bash
 
 COPY ./conf/* /opt/etc/hadoop/
